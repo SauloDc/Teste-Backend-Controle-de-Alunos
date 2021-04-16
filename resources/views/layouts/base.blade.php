@@ -14,9 +14,29 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class=" ml-3 navbar-brand" href="">Escolas</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
+                <ul class="navbar-nav mr-auto">
+                    <li class="ml-3 nav-item active">
+                        <a class="nav-link" href="">Turmas <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="ml-3 nav-item active">
+                        <a class="nav-link" href="">Alunos<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="container">
-        @yield('content')
+        <div class="card-body">
+            @yield('content')
+        </div>
     </div>
 
 
@@ -30,6 +50,7 @@
     <script>
         $(document).ready(function() {
             $('#datatable').DataTable({
+                "lengthChange": false,
                 language: {
                     "sEmptyTable": "Nenhum registro encontrado",
                     "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",

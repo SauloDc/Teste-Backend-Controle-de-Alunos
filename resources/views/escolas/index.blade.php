@@ -1,15 +1,45 @@
-@extends('layouts.template')
-@section('title', 'Escolas')
+@extends('layouts.base')
+@section('title', 'Home')
 
 @section('content')
+<nav class="mt-2 navbar justify-content-between">
+    <h2 class="my-auto">Escolas</h2>
+    <form class="form-inline" action="" method="get">
+        <button class="btn btn-success " type="submit">Criar Escola</button>
+    </form>
+</nav>
+<table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Age</th>
+            <th>Start date</th>
+            <th>Salary</th>
+            <th>Extn.</th>
+            <th>E-mail</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for($i=0 ;$i < 100; $i++) 
+            <tr>
+                <td>Tiger</td>
+                <td>Nixon</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                <td>61</td>
+                <td>2011/04/25</td>
+                <td>$320,800</td>
+                <td>5421</td>
+                <td>t.nixon@datatables.net</td>
+            </tr>
+        @endfor
+    </tbody>
+</table>
 
-<div class="card shadow mb-4">
-    <nav class="mt-2 mx-2 navbar justify-content-between">
-        <h2 class="my-auto">Escolas</h2>
-        <form class="form-inline" action="{{ route('Escola.create') }}" method="get">
-            <button class="btn btn-success my-2 my-sm-0" type="submit">Criar Escola</button>
-        </form>
-    </nav>
+
 
     <div class="card-body">
         <div class="table-responsive">
