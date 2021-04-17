@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aluno;
+use App\Models\aluno_turma;
+use App\Models\Escola;
 use App\Models\Turma;
 use Illuminate\Http\Request;
 
@@ -15,7 +18,8 @@ class TurmaController extends Controller
     public function index()
     {
         $turmas = Turma::all();
-        return(view('turmas.index',['turmas', $turmas]));
+        // dd($turmas);
+        return(view('turmas.index',['turmas' => $turmas]));
     }
 
     /**
@@ -25,7 +29,8 @@ class TurmaController extends Controller
      */
     public function create()
     {
-        //
+        $escolas = Escola::all();
+        return view('turmas.create',['escolas' => $escolas]);
     }
 
     /**
@@ -36,7 +41,8 @@ class TurmaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Turma::create($request->all());
+        return redirect(route('turma.index'));
     }
 
     /**
@@ -47,7 +53,10 @@ class TurmaController extends Controller
      */
     public function show($id)
     {
-        //
+        $turma = Turma::find($id);
+        $alunos = aluno_turma::alunosDestaTurma($id);
+        // $alunos = Aluno::all();
+        return view('turmas.show', ['turma' => $turma, 'alunos' => $alunos]);
     }
 
     /**
@@ -58,7 +67,8 @@ class TurmaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $turma = Turma::find($id);
+        return view('turmas.edit', ['turma' => $turma]);
     }
 
     /**
@@ -70,7 +80,9 @@ class TurmaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $turma = Turma::find($id);
+        $turma->update($request->all());
+        return redirect(route('turmas.index'));
     }
 
     /**
@@ -81,6 +93,8 @@ class TurmaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $turma = Turma::find($id);
+        $turma->delete();
+        return redirect(route('turmas.index'));
     }
 }

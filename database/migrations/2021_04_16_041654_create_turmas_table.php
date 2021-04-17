@@ -17,9 +17,11 @@ class CreateTurmasTable extends Migration
             $table->id();
             $table->date('ano');
             $table->string('nivel');
+            $table->string('serie');
             $table->string('turno');
-            $table->foreignId('escola_id')->constrained();
+            $table->unsignedBigInteger('escola_id');
             $table->timestamps();
+            $table->foreign('escola_id')->references('id')->on('escolas');
         });
     }
 

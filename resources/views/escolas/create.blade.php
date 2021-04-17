@@ -1,8 +1,8 @@
-@extends('layouts.template')
+@extends('layouts.base')
 @section('title', 'Criar Escolas')
 
 @section('content')
-<form class="mt-4" action="{{ route('Escola.store') }}" method="post"> 
+<form class="mt-4" action="{{ route('escola.store') }}" method="post"> 
     @include('escolas._partials.form')
 </form>
 @endsection

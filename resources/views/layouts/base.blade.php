@@ -15,7 +15,6 @@
 
 <body>
 
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class=" ml-3 navbar-brand" href="{{ route('escola.index') }}">Escolas</a>
@@ -40,13 +39,12 @@
         </div>
     </div>
 
-
-
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/609f1c09b3.js" crossorigin="anonymous"></script>
 
     <script>
         $(document).ready(function() {

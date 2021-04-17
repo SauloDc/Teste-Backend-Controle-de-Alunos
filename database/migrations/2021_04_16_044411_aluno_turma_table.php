@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlunoTurmaController extends Migration
+class AlunoTurmaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class AlunoTurmaController extends Migration
      */
     public function up()
     {
-        Schema::create('aluno_turmas', function (Blueprint $table) {
+        Schema::create('aluno_turma', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('aluno_id')->constrained();
-            $table->foreignId('escola_id')->constrained();
+            $table->unsignedBigInteger('aluno_id');
+            $table->unsignedBigInteger('turma_id');
             $table->timestamps();
+
+            $table->foreign('aluno_id')->references('id')->on('alunos')->cascadeOnDelete();
+            $table->foreign('turma_id')->references('id')->on('turmas')->cascadeOnDelete();
         });
     }
 

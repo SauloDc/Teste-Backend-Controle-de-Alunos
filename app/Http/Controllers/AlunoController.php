@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aluno;
+use App\Models\Escola;
+use App\Models\Turma;
 use Illuminate\Http\Request;
 
 class AlunoController extends Controller
@@ -15,7 +17,7 @@ class AlunoController extends Controller
     public function index()
     {
         $alunos = Aluno::all();
-        return(view('alunos.index',['alunos', $alunos]));
+        return(view('alunos.index',['alunos' => $alunos]));
     }
 
     /**
@@ -25,7 +27,9 @@ class AlunoController extends Controller
      */
     public function create()
     {
-        //
+        $escolas = Escola::all();
+        $turmas = Turma::all();
+        return view('alunos.create',['escolas' => $escolas, 'turmas' => $turmas]);
     }
 
     /**
@@ -36,7 +40,14 @@ class AlunoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $turma_id = $request->all()['turma_id']; 
+        $aluno = Aluno::create($request->all());
+        
+        $turma = Turma::find($turma_id);
+        // $aluno->turma()->attach($turma);
+        $turma->aluno()->attach($aluno);
+    
+        return redirect(route('aluno.index'));
     }
 
     /**
@@ -47,9 +58,10 @@ class AlunoController extends Controller
      */
     public function show($id)
     {
-        //
+        $aluno = Aluno::find($id);
+        return view('alunos.show',['aluno' => $aluno]);
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -58,7 +70,10 @@ class AlunoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $aluno = Aluno::find($id);
+        $escolas = Escola::all();
+        $turmas = Turma::all();
+        return view('alunos.edit', ['aluno' => $aluno, 'escolas' => $escolas, 'turmas' => $turmas]);
     }
 
     /**
@@ -70,7 +85,9 @@ class AlunoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $aluno = Aluno::find($id);
+        $aluno->update($request->all());
+        return redirect(route('aluno.index'));
     }
 
     /**
@@ -81,6 +98,8 @@ class AlunoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $aluno = Aluno::find($id);
+        $aluno->delete();
+        return redirect(route('aluno.index'));
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Escola;
+use App\Models\Turma;
 use Illuminate\Http\Request;
 
 class EscolaController extends Controller
@@ -15,7 +16,7 @@ class EscolaController extends Controller
     public function index()
     {
         $escolas = Escola::all();
-        return(view('escolas.index',['escolas', $escolas]));
+        return(view('escolas.index',['escolas'=> $escolas, 'qtdAlunos' => Escola::qtdAlunos()]));
     }
 
     /**
@@ -25,7 +26,7 @@ class EscolaController extends Controller
      */
     public function create()
     {
-        //
+       return(view('escolas.create'));
     }
 
     /**
@@ -36,7 +37,8 @@ class EscolaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Escola::create($request->all());
+        return redirect(route('escola.index'));
     }
 
     /**
@@ -47,7 +49,9 @@ class EscolaController extends Controller
      */
     public function show($id)
     {
-        //
+        $escola = Escola::find($id);
+        $turmas = Turma::all()->where('escola_id', '=', $id);
+        return view('escolas.show', ['escola' => $escola, 'turmas' => $turmas]);
     }
 
     /**
@@ -58,9 +62,10 @@ class EscolaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $escola = Escola::find($id);
+        return view('escolas.edit', ['escola' => $escola]);
     }
-
+   
     /**
      * Update the specified resource in storage.
      *
@@ -70,7 +75,9 @@ class EscolaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $escola = Escola::find($id);
+        $escola->update($request->all());
+        return redirect(route('escola.index'));
     }
 
     /**
@@ -81,6 +88,8 @@ class EscolaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $escola = Escola::find($id);
+        $escola->delete();
+        return redirect(route('escola.index'));
     }
 }

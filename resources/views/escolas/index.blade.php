@@ -4,8 +4,8 @@
 @section('content')
 <nav class="mt-2 navbar justify-content-between">
     <h2 class="my-auto">Escolas</h2>
-    <form class="form-inline" action="" method="get">
-        <button class="btn btn-success " type="submit">Criar Escola</button>
+    <form class="form-inline" action="{{ route('escola.create') }}" method="get">
+        <button class="btn btn-success" type="submit">Criar Escola</button>
     </form>
 </nav>
 <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
@@ -27,9 +27,9 @@
             <td>{{ $escola->endereco }}</td>
             <td>{{ $qtdAlunos[$escola->id] }}</td>
             <td class="text-center" style="display:blocks;">
-                <a class="btn btn-primary" href="{{route('Escola.show', $escola->id)}}" title="Mostrar"><i class="far fa-eye text-white"></i></a>
-                <a class="btn btn-success" href="{{route('Escola.edit', $escola->id)}}" title="Editar"><i class="far fa-edit text-white"></i></a>
-                <form action="{{route('Escola.destroy', $escola->id)}}" method="post" style="display:inline">
+                <a class="btn btn-primary" href="{{route('escola.show', $escola->id)}}" title="Mostrar"><i class="far fa-eye text-white"></i></a>
+                <a class="btn btn-success" href="{{route('escola.edit', $escola->id)}}" title="Editar"><i class="far fa-edit text-white"></i></a>
+                <form action="{{route('escola.destroy', $escola->id)}}" method="post" style="display:inline">
                     @method('DELETE')
                     @csrf
                     <button class=" center btn btn-danger" type="submit" title="Apagar"><i class="far fa-trash-alt text-white"></i></button>

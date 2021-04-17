@@ -5,7 +5,7 @@
 
 <nav class="navbar justify-content-between">
     <h2 class="my-auto">Alunos</h2>
-    <form class="form-inline" action="" method="get">
+    <form class="form-inline" action="{{ route('aluno.create') }}" method="get">
         <button class="btn btn-success" type="submit">Criar Aluno</button>
     </form>
 </nav>
@@ -30,11 +30,11 @@
             <td>{{ $aluno->telefone }}</td>
             <td>{{ $aluno->email }}</td>
             <td>{{ date('d/m/Y', strtotime($aluno->dataNascimento)) }}</td>
-            <td>{{ $aluno->sexo === 'male' ? "Masculino" : "Feminino" }}</td>
+            <td>{{ $aluno->genero }}</td>
             <td class="text-center" style="display:blocks;">
-                <a class="btn btn-primary" href="{{route('Aluno.show', $aluno->id)}}" title="Mostrar"><i class="far fa-eye text-white"></i></a>
-                <a class="btn btn-success" href="{{route('Aluno.edit', $aluno->id)}}" title="Editar"><i class="far fa-edit text-white"></i></a>
-                <form action="{{route('Aluno.destroy', $aluno->id)}}" method="post" style="display:inline">
+                <a class="btn btn-primary" href="{{route('aluno.show', $aluno->id)}}" title="Mostrar"><i class="far fa-eye text-white"></i></a>
+                <a class="btn btn-success" href="{{route('aluno.edit', $aluno->id)}}" title="Editar"><i class="far fa-edit text-white"></i></a>
+                <form action="{{route('aluno.destroy', $aluno->id)}}" method="post" style="display:inline">
                     @method('DELETE')
                     @csrf
                     <button class=" center btn btn-danger" type="submit" title="Apagar"><i class="far fa-trash-alt text-white"></i></button>
