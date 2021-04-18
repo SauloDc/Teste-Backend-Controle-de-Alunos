@@ -1,4 +1,4 @@
-# Sistema-de-Controle-de-Alunos
+# Controle-de-Alunos
 Um projeto simples para exercitar a construção do Crud utilizando a linguagem PHP com framework Laravel;
 
 #### Sobre o Projeto: 
