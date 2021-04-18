@@ -26,7 +26,7 @@ class TurmaFactory extends Factory
         $serie = $nivel === "Ensino Fundamental" ? $this->faker->numberBetween(1 , 9) : $this->faker->numberBetween(1 , 3);    
         $escola_id = Escola::query()->inRandomOrder()->first()->id; 
         return [
-            'ano'=> $this->faker->dateTimeThisDecade,
+            'ano'=> $this->faker->dateTimeThisDecade->format('Y-m-d'),
             'nivel'=> $nivel,
             'serie'=> $serie,
             'turno'=> $this->faker->randomElement(['Manhã', 'Tarde', 'Noite']),

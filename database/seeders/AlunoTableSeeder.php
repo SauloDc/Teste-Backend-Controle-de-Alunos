@@ -14,6 +14,6 @@ class AlunoTableSeeder extends Seeder
      */
     public function run()
     {
-        Aluno::factory()->count(50)->create();
+        Aluno::factory()->count(20)->create();
     }
 }

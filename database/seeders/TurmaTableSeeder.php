@@ -14,6 +14,6 @@ class TurmaTableSeeder extends Seeder
      */
     public function run()
     {
-        Turma::factory()->count(10)->create();
+        Turma::factory()->count(50)->create();
     }
 }

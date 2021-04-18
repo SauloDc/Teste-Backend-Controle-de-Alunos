@@ -14,6 +14,6 @@ class EscolaTableSeeder extends Seeder
      */
     public function run()
     {
-        Escola::factory()->count(5)->create();
+        Escola::factory()->count(7)->create();
     }
 }

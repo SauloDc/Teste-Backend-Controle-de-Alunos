@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Aluno;
 use App\Models\Escola;
-use App\Models\Turma;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AlunoFactory extends Factory
@@ -23,13 +22,14 @@ class AlunoFactory extends Factory
      */
     public function definition()
     {
-        $gender = $this->faker->randomElement(['male', 'female']);
+        $genero = $this->faker->randomElement(['Masculino', 'Feminino']);
+        $gender = $genero == 'Masculino' ? 'Male' : 'Female';
         return [
             'nome' => $this->faker->name($gender),
             'telefone' => $this->faker->landline,
             'email' => $this->faker->email,
-            'data_nascimento' => $this->faker->dateTimeThisCentury,
-            'genero' => $gender,
+            'data_nascimento' => $this->faker->dateTimeThisCentury->format('Y-m-d'),
+            'genero' => $genero,
             'escola_id' => Escola::query()->inRandomOrder()->first()->id,
         ];
     }
