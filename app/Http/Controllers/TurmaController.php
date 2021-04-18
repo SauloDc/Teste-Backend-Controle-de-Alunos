@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Aluno;
 use App\Models\aluno_turma;
 use App\Models\Escola;
 use App\Models\Turma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TurmaController extends Controller
 {
@@ -19,7 +19,7 @@ class TurmaController extends Controller
     {
         $turmas = Turma::all();
         // dd($turmas);
-        return(view('turmas.index',['turmas' => $turmas]));
+        return (view('turmas.index', ['turmas' => $turmas]));
     }
 
     /**
@@ -30,7 +30,7 @@ class TurmaController extends Controller
     public function create()
     {
         $escolas = Escola::all();
-        return view('turmas.create',['escolas' => $escolas]);
+        return view('turmas.create', ['escolas' => $escolas]);
     }
 
     /**
@@ -41,7 +41,22 @@ class TurmaController extends Controller
      */
     public function store(Request $request)
     {
-        Turma::create($request->all());
+        $turma = $request->all();
+        
+        Validator::make($request->all(), [
+            'serie' => [
+                function ($attribute, $value, $fail) use ($turma) {
+                    if ($turma['nivel'] == 'Ensino Médio' && ($value > 3 || $value < 1)) {
+                        $fail('Turmas do Ensino Médio podem ter as series 1º, 2º ou 3º');
+                    }
+                    else if ($turma['nivel'] == 'Ensino Fundamental' && ($value > 9 || $value < 1)) {
+                        $fail('Turmas do Ensino Fundamental podem ter as series  1º, 2º ou 3º ... 9º');
+                    }
+                },
+            ],
+        ])->validate();
+
+        Turma::create($turma);
         return redirect(route('turma.index'));
     }
 
@@ -68,7 +83,8 @@ class TurmaController extends Controller
     public function edit($id)
     {
         $turma = Turma::find($id);
-        return view('turmas.edit', ['turma' => $turma]);
+        $escolas = Escola::all();
+        return view('turmas.edit', ['turma' => $turma, 'escolas' => $escolas]);
     }
 
     /**
@@ -80,9 +96,24 @@ class TurmaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $edit = $request->all();
+        
+        Validator::make($request->all(), [
+            'serie' => [
+                function ($attribute, $value, $fail) use ($edit) {
+                    if ($edit['nivel'] == 'Ensino Médio' && ($value > 3 || $value < 1)) {
+                        $fail('Turmas do Ensino Médio podem ter as series 1º, 2º ou 3º');
+                    }
+                    else if ($edit['nivel'] == 'Ensino Fundamental' && ($value > 9 || $value < 1)) {
+                        $fail('Turmas do Ensino Fundamental podem ter as series  1º, 2º ou 3º ... 9º');
+                    }
+                },
+            ],
+        ])->validate();
+
         $turma = Turma::find($id);
         $turma->update($request->all());
-        return redirect(route('turmas.index'));
+        return redirect(route('turma.index'));
     }
 
     /**
@@ -95,6 +126,6 @@ class TurmaController extends Controller
     {
         $turma = Turma::find($id);
         $turma->delete();
-        return redirect(route('turmas.index'));
+        return redirect(route('turma.index'));
     }
 }

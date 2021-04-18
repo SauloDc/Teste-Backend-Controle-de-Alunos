@@ -35,10 +35,10 @@
         <tr>
             <td>{{ $aluno->id }}</td>
             <td>{{ $aluno->nome }}</td>
-            <td>{{ $aluno->telefone }}</td>
+            <td>{{ is_null($aluno->telefone) ? 'Não informado' : $aluno->telefone }}</td>
             <td>{{ $aluno->email }}</td>
-            <td>{{ date('d/m/Y', strtotime($aluno->dataNascimento)) }}</td>
-            <td>{{ $aluno->genero }}</td>
+            <td>{{ date('d/m/Y', strtotime($aluno->data_nascimento)) }}</td>
+            <td>{{ $aluno->genero == '-'? 'Não informado' : $aluno->genero }}</td>
             <td class="text-center" style="display:blocks;">
                 <a class="btn btn-primary" href="{{route('aluno.show', $aluno->id)}}" title="Mostrar"><i class="far fa-eye text-white"></i></a>
                 <a class="btn btn-success" href="{{route('aluno.edit', $aluno->id)}}" title="Editar"><i class="far fa-edit text-white"></i></a>

@@ -24,6 +24,6 @@ class Aluno extends Model
 
     public  function turma()
     {
-        return $this->belongsToMany(Turma::class);
+        return $this->belongsToMany(Turma::class)->withTimestamps();
     }
 }

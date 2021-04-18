@@ -21,7 +21,7 @@ class CreateTurmasTable extends Migration
             $table->string('turno');
             $table->unsignedBigInteger('escola_id');
             $table->timestamps();
-            $table->foreign('escola_id')->references('id')->on('escolas');
+            $table->foreign('escola_id')->references('id')->on('escolas')->cascadeOnDelete();
         });
     }
 

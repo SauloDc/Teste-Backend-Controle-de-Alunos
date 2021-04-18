@@ -18,21 +18,22 @@ class aluno_turma extends Model
     public static function alunosDestaTurma($id)
     {
         $alunosDestaTurma = [];
-        $alunos_turma = aluno_turma::all();
-        foreach ($alunos_turma as $turma) {
-            if($turma == $id){
-                array_push($alunosDestaTurma, Aluno::find($id));
-            }
-        }
-        return $alunosDestaTurma;
-    }  
+        $alunos_turma = aluno_turma::all()->where('turma_id', '=', $id);
 
-    public  function aluno(){
+        foreach ($alunos_turma as $aluno_turma){
+            array_push($alunosDestaTurma, Aluno::find($aluno_turma->aluno_id));
+        }
+
+        return $alunosDestaTurma;
+    }
+
+    public  function aluno()
+    {
         return $this->hasMany(Aluno::class);
     }
 
-    public  function turma(){
+    public  function turma()
+    {
         return $this->hasMany(Turma::class);
     }
-
 }

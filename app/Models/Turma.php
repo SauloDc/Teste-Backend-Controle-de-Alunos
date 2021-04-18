@@ -24,7 +24,7 @@ class Turma extends Model
 
     public  function aluno()
     {
-        return $this->belongsToMany(Aluno::class);
+        return $this->belongsToMany(Aluno::class)->withTimestamps();
     }
 
 }
